@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/constants/routes.dart';
 import 'package:food_app/models/products_model.dart';
+import 'package:food_app/screen/cart_screen.dart';
 import 'package:food_app/widgets/small_text.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -18,7 +20,11 @@ class _ProductDetailsState extends State<ProductDetails> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+          IconButton(
+              onPressed: () {
+                Routes.instance.push(widget: CartPage(), context: context);
+              },
+              icon: const Icon(Icons.shopping_cart_outlined))
         ],
       ),
       body: Padding(
@@ -97,10 +103,11 @@ class _ProductDetailsState extends State<ProductDetails> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 OutlinedButton(
-                    onPressed: () {},
-                    child: SmallText(
-                      text: "ADD TO CART",
-                    ),),
+                  onPressed: () {},
+                  child: SmallText(
+                    text: "ADD TO CART",
+                  ),
+                ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -108,7 +115,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   width: 150,
                   height: 40,
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: () {},
                     child: SmallText(text: "BUY"),
                   ),
                 )

@@ -4,7 +4,7 @@ import 'package:food_app/models/categories_model.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/screen/category_view.dart';
 import 'package:food_app/screen/product_details.dart';
-import 'package:food_app/widgets/top_titles.dart';
+import 'package:food_app/widgets/custom_app_bar.dart';
 
 import '../constants/routes.dart';
 import '../widgets/small_text.dart';
@@ -42,13 +42,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        title: const CustomAppBar(
+          word1: "E-Commerce",
+          word2: "iCart",
+        ),
+      ),
       body: isLoading
           ? Center(
               child: Container(
                 height: 100,
                 width: 100,
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               ),
             )
           : SingleChildScrollView(
@@ -60,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const TopTitles(title: "iCart", subtitle: ''),
                           TextFormField(
                             decoration: const InputDecoration(
                                 hintText: 'Search',
@@ -88,8 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .map((e) => Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: GestureDetector(
-                                        onTap: (){
-                                          Routes.instance.push(widget: CategoryView(categoryModel: e), context: context);
+                                        onTap: () {
+                                          Routes.instance.push(
+                                              widget: CategoryView(
+                                                  categoryModel: e),
+                                              context: context);
                                         },
                                         child: Card(
                                           color: Colors.white,
@@ -109,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .toList(),
                           ),
                         ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   productModelList.isEmpty
@@ -119,12 +130,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         )
                       : Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SmallText(
-                      text: 'Best Products',
-                      size: 18,
-                    ),
-                  ),
+                          padding: const EdgeInsets.all(12.0),
+                          child: SmallText(
+                            text: 'Best Products',
+                            size: 18,
+                          ),
+                        ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: GridView.builder(
@@ -170,7 +181,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 140,
                                     child: OutlinedButton(
                                         onPressed: () {
-                                          Routes.instance.push(widget: ProductDetails(singleProduct: singleProduct), context: context);
+                                          Routes.instance.push(
+                                              widget: ProductDetails(
+                                                  singleProduct: singleProduct),
+                                              context: context);
                                         },
                                         child: SmallText(
                                           text: "Buy",
