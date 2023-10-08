@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/screen/single_cart_item.dart';
+import 'package:food_app/screen/single_favorite_item.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/app_provider.dart';
 import '../widgets/custom_app_bar.dart';
 
-class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({super.key});
 
-  @override
-  State<CartPage> createState() => _CartPageState();
-}
-
-class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
@@ -27,7 +22,7 @@ class _CartPageState extends State<CartPage> {
           word2: "iCart",
         ),
       ),
-      body: appProvider.getCartProductList.isEmpty
+      body: appProvider.getFavoriteProductList.isEmpty
           ? Container(
               height: 500,
               decoration: const BoxDecoration(
@@ -35,11 +30,11 @@ class _CartPageState extends State<CartPage> {
                       image: AssetImage("assets/empty_cart.png"),
                       fit: BoxFit.cover)))
           : ListView.builder(
-              itemCount: appProvider.getCartProductList.length,
+              itemCount: appProvider.getFavoriteProductList.length,
               padding: const EdgeInsets.all(12),
               itemBuilder: (context, index) {
-                return SingleCartItem(
-                  singleProduct: appProvider.getCartProductList[index],
+                return SingleFavoriteItem(
+                  singleProduct: appProvider.getFavoriteProductList[index],
                 );
               }),
     );

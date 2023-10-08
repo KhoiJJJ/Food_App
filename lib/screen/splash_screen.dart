@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/welcome.dart';
-import 'package:food_app/screen/home_screen.dart';
+import 'package:food_app/screen/bottom_bar.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
       } else {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            MaterialPageRoute(builder: (context) => const BottomBar()),
             (route) => false);
       }
     });

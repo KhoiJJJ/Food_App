@@ -41,6 +41,7 @@ class _CategoryViewState extends State<CategoryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -63,9 +64,11 @@ class _CategoryViewState extends State<CategoryView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SmallText(text: widget.categoryModel.name,size: 22,)
-                  ),
+                      padding: const EdgeInsets.all(12.0),
+                      child: SmallText(
+                        text: widget.categoryModel.name,
+                        size: 22,
+                      )),
                   productModelList.isEmpty
                       ? Center(
                           child: SmallText(

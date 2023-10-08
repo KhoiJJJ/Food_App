@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/constants/theme.dart';
+import 'package:food_app/provider/app_provider.dart';
 import 'package:food_app/screen/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
    WidgetsFlutterBinding.ensureInitialized();
@@ -16,11 +18,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: themeData,
-      home:const SplashPage(),
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider(
+      create: (context)=> AppProvider(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: themeData,
+        home:const SplashPage(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
