@@ -3,11 +3,11 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/auth/sign_up.dart';
+import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/top_titles.dart';
 
 import '../constants/routes.dart';
 import '../firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
-import '../screen/home_screen.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/show_alert.dart';
 import '../widgets/small_text.dart';
@@ -29,7 +29,7 @@ class Welcome extends StatelessWidget {
             Center(child: Image.asset("assets/shop-image.png",)),
             const SizedBox(height: 18,),
             PrimaryButton(title:'Login',onPressed: (){
-              Routes.instance.push(widget: const LoginPage(),context: context);
+              Routes.instance.push(widget: const SignInPage(),context: context);
             },),
             const SizedBox(height: 18,),
             PrimaryButton(title:'Sign up',onPressed: (){
@@ -47,7 +47,7 @@ class Welcome extends StatelessWidget {
                     onPressed: () {
                       AuthenticationProvider().signInWithGoogle().then((value) {
                         showAlert(context, "You logged in");
-                        Routes.instance.pushAndRemoveUntil(widget: const HomeScreen(), context: context);
+                        Routes.instance.pushAndRemoveUntil(widget: const BottomBar(), context: context);
                       }).catchError((e) {
                         showAlert(context, e.toString());
                       });

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
 import 'package:food_app/screen/home_screen.dart';
 import 'package:food_app/widgets/small_text.dart';
@@ -112,7 +113,7 @@ class _SignUpPage extends State<SignUpPage> {
               ),
               GestureDetector(
                 onTap: (){
-                  Navigator.of(context).pop();
+                  Routes.instance.push(widget: SignInPage(), context: context);
                 },
                 child: Center(
                     child: SmallText(
