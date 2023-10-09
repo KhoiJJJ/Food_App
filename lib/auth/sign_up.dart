@@ -1,15 +1,14 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/sign_in.dart';
+import 'package:food_app/constants/constants.dart';
 import 'package:food_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
-import 'package:food_app/screen/home_screen.dart';
+import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:food_app/widgets/top_titles.dart';
 
 import '../constants/routes.dart';
 import '../widgets/primary_button.dart';
-import '../widgets/show_alert.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -33,7 +32,8 @@ class _SignUpPage extends State<SignUpPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TopTitles(title: 'Create account', subtitle: 'Welcome to iCart'),
+              const TopTitles(
+                  title: 'Create account', subtitle: 'Welcome to iCart'),
               const SizedBox(
                 height: 30,
               ),
@@ -94,14 +94,25 @@ class _SignUpPage extends State<SignUpPage> {
               ),
               PrimaryButton(
                 title: 'Sign Up',
-                onPressed: () {
-                  AuthenticationProvider().signUpWithEmailAndPassword(_emailController.text,_passwordController.text,
-                  _phoneController.text,_nameController.text).then((userCredential) {
-                      showAlert(context, "You logged in");
-                      Routes.instance.pushAndRemoveUntil(widget: const HomeScreen(), context: context);
-                    }).catchError((e) {
-                      showAlert(context, e.toString());
-                    });
+                onPressed: () async {
+                  bool isValidated = signUpValidation(
+                      _emailController.text,
+                      _passwordController.text,
+                      _nameController.text,
+                      _phoneController.text);
+                  if (isValidated) {
+                    bool isLogined = await AuthenticationProvider()
+                        .signUpWithEmailAndPassword(
+                            _emailController.text,
+                            _passwordController.text,
+                            _nameController.text,
+                            _phoneController.text,
+                            context);
+                    if (isLogined) {
+                      Routes.instance.pushAndRemoveUntil(
+                          widget: const BottomBar(), context: context);
+                    }
+                  }
                 },
               ),
               const SizedBox(
@@ -112,8 +123,9 @@ class _SignUpPage extends State<SignUpPage> {
                 height: 10,
               ),
               GestureDetector(
-                onTap: (){
-                  Routes.instance.push(widget: SignInPage(), context: context);
+                onTap: () {
+                  Routes.instance
+                      .push(widget: const SignInPage(), context: context);
                 },
                 child: Center(
                     child: SmallText(

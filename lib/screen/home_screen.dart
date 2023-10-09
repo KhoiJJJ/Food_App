@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:food_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
 import 'package:food_app/models/categories_model.dart';
 import 'package:food_app/models/products_model.dart';
+import 'package:food_app/provider/app_provider.dart';
 import 'package:food_app/screen/category_view.dart';
 import 'package:food_app/screen/product_details.dart';
 import 'package:food_app/widgets/custom_app_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/routes.dart';
 import '../widgets/small_text.dart';
@@ -23,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   @override
   void initState() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    appProvider.getUserInfoFirebase();
     getCategoriesList();
     super.initState();
   }
@@ -33,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     categoriesList = await FirebaseFirestoreHelper.instance.getCategories();
     productModelList = await FirebaseFirestoreHelper.instance.getBestProducts();
+
     productModelList.shuffle();
     setState(() {
       isLoading = false;

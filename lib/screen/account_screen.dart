@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/widgets/small_text.dart';
+import 'package:provider/provider.dart';
 
 import '../firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import '../provider/app_provider.dart';
 import '../widgets/custom_app_bar.dart';
 
 class AccountPage extends StatefulWidget {
@@ -15,6 +17,7 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
+    AppProvider appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -30,16 +33,18 @@ class _AccountPageState extends State<AccountPage> {
           Expanded(
             child: Column(
               children: [
-                const Icon(
-                  Icons.person_outline,
-                  size: 130,
+                appProvider.getUserInformation.image == null
+                    ? const Icon(
+                        Icons.person_outline,
+                        size: 130,
+                      )
+                    : Image.network(appProvider.getUserInformation.image!),
+                Text(
+                  appProvider.getUserInformation.name,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-                SmallText(
-                  text: 'User',
-                  size: 22,
-                ),
-                const Text(
-                  "ngockhoi4423@gmail.com",
+                Text(
+                  appProvider.getUserInformation.email,
                   style: TextStyle(fontSize: 15),
                 ),
                 ElevatedButton(
@@ -47,7 +52,10 @@ class _AccountPageState extends State<AccountPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                   ),
-                  child:  SmallText(text:"hello",size: 18,),
+                  child: SmallText(
+                    text: "hello",
+                    size: 18,
+                  ),
                 )
               ],
             ),
@@ -86,12 +94,12 @@ class _AccountPageState extends State<AccountPage> {
                     leading: const Icon(Icons.logout_outlined),
                     onTap: () {
                       AuthenticationProvider().signOut().then((value) {
-                        Navigator.of(context,rootNavigator: true).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const SignInPage()),
-                            (_) => false);
+                        Navigator.of(context, rootNavigator: true)
+                            .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const SignInPage()),
+                                (_) => false);
                       });
-                     
                     },
                     title: const Text("Log out"),
                   ),
