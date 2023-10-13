@@ -1,10 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:food_app/constants/constants.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/models/user_model.dart';
 
-import '../../models/categories_model.dart';
+import '../models/categories_model.dart';
+import '../models/orders_model.dart';
 
 class FirebaseFirestoreHelper {
   static FirebaseFirestoreHelper instance = FirebaseFirestoreHelper();
@@ -64,5 +68,61 @@ class FirebaseFirestoreHelper {
             .get();
 
     return UserModel.fromJson(querySnapshot.data()!);
+  }
+
+  Future<bool> upLoadOrderedProductFirebase(
+      List<ProductModel> list, BuildContext context, String payment) async {
+    try {
+      showLoaderDialog(context);
+      double totalPrice = 0.0;
+      for (var e in list) {
+        totalPrice += e.price * e.qty!;
+      }
+      DocumentReference documentReference = _firebaseFirestore
+          .collection("userOrders")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("orders")
+          .doc();
+      DocumentReference admin = _firebaseFirestore.collection("orders").doc();
+      admin.set({
+        "products": list.map((e) => e.toJson()),
+        "status": "Pending",
+        "totalPrice": totalPrice,
+        "payment": payment,
+      });
+      documentReference.set({
+        "products": list.map((e) => e.toJson()),
+        "status": "Pending",
+        "totalPrice": totalPrice,
+        "payment": payment,
+      });
+      Navigator.of(context, rootNavigator: true).pop();
+      showMessage("Ordered Successfully");
+      return true;
+    } catch (e) {
+      showMessage(e.toString());
+      Navigator.of(context, rootNavigator: true).pop();
+      return false;
+    }
+  }
+
+  //// Ger Order user
+
+  Future<List<OrderModel>> getUserOrder() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await _firebaseFirestore
+              .collection("userOrders")
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .collection("orders")
+              .get();
+      List<OrderModel> orderList =
+          querySnapshot.docs.map((e) => OrderModel.fromJson(e.data())).toList();
+
+      return orderList;
+    } catch (e) {
+      showMessage(e.toString());
+      return [];
+    }
   }
 }

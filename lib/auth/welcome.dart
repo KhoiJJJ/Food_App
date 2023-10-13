@@ -7,7 +7,7 @@ import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/top_titles.dart';
 
 import '../constants/routes.dart';
-import '../firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import '../firebase/firebase_auth_helper.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/show_alert.dart';
 import '../widgets/small_text.dart';

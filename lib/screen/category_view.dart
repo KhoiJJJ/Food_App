@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/models/categories_model.dart';
 import 'package:food_app/screen/product_details.dart';
 import '../constants/routes.dart';
-import '../firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
+import '../firebase/firebase_firestore.dart';
 import '../models/products_model.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/small_text.dart';

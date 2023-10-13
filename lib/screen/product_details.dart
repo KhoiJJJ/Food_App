@@ -4,7 +4,7 @@ import 'package:food_app/constants/routes.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/provider/app_provider.dart';
 import 'package:food_app/screen/cart_screen.dart';
-import 'package:food_app/screen/favorite_screen.dart';
+import 'package:food_app/screen/check_out_screen.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:provider/provider.dart';
 
@@ -43,114 +43,119 @@ class _ProductDetailsState extends State<ProductDetails> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Container(
-          
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.network(
-                  widget.singleProduct.image,
-                  width: 400,
-                  height: 400,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SmallText(
-                      text: widget.singleProduct.name,
-                      size: 18,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          setState(() {
-                            widget.singleProduct.isFavorite =
-                                !widget.singleProduct.isFavorite;
-                          });
-                          if (widget.singleProduct.isFavorite) {
-                            appProvider.addFavoriteProduct(widget.singleProduct);
-                          } else {
-                            appProvider.removeFavoriteProduct(widget.singleProduct);
-                          }
-                        },
-                        icon: Icon(appProvider.getFavoriteProductList.contains(widget.singleProduct)
-                            ? Icons.favorite
-                            : Icons.favorite_border)),
-                  ],
-                ),
-                SmallText(text: widget.singleProduct.description),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    CupertinoButton(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.network(
+                widget.singleProduct.image,
+                width: 400,
+                height: 400,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmallText(
+                    text: widget.singleProduct.name,
+                    size: 18,
+                  ),
+                  IconButton(
                       onPressed: () {
                         setState(() {
-                          if (quantity != 1) {
-                            quantity--;
-                          }
+                          widget.singleProduct.isFavorite =
+                              !widget.singleProduct.isFavorite;
                         });
+                        if (widget.singleProduct.isFavorite) {
+                          appProvider
+                              .addFavoriteProduct(widget.singleProduct);
+                        } else {
+                          appProvider
+                              .removeFavoriteProduct(widget.singleProduct);
+                        }
                       },
-                      padding: EdgeInsets.zero,
-                      child: const CircleAvatar(
-                        child: Icon(Icons.remove),
-                      ),
+                      icon: Icon(appProvider.getFavoriteProductList
+                              .contains(widget.singleProduct)
+                          ? Icons.favorite
+                          : Icons.favorite_border)),
+                ],
+              ),
+              SmallText(text: widget.singleProduct.description),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  CupertinoButton(
+                    onPressed: () {
+                      setState(() {
+                        if (quantity != 1) {
+                          quantity--;
+                        }
+                      });
+                    },
+                    padding: EdgeInsets.zero,
+                    child: const CircleAvatar(
+                      child: Icon(Icons.remove),
                     ),
-                    const SizedBox(
-                      width: 12,
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  SmallText(
+                    text: quantity.toString(),
+                    size: 22,
+                  ),
+                  const SizedBox(
+                    width: 12,
+                  ),
+                  CupertinoButton(
+                    onPressed: () {
+                      setState(() {
+                        quantity++;
+                      });
+                    },
+                    padding: EdgeInsets.zero,
+                    child: const CircleAvatar(
+                      child: Icon(Icons.add),
                     ),
-                    SmallText(
-                      text: quantity.toString(),
-                      size: 22,
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      ProductModel productModel =
+                          widget.singleProduct.copyWith(qty: quantity);
+                      appProvider.addCartProduct(productModel);
+                      showAlert(context, "Add to cart");
+                    },
+                    child: SmallText(
+                      text: "ADD TO CART",
                     ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    CupertinoButton(
-                      onPressed: () {
-                        setState(() {
-                          quantity++;
-                        });
-                      },
-                      padding: EdgeInsets.zero,
-                      child: const CircleAvatar(
-                        child: Icon(Icons.add),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    OutlinedButton(
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SizedBox(
+                    width: 150,
+                    height: 40,
+                    child: ElevatedButton(
                       onPressed: () {
                         ProductModel productModel =
                             widget.singleProduct.copyWith(qty: quantity);
-                        appProvider.addCartProduct(productModel);
-                        showAlert(context, "Add to cart");
+                        Routes.instance.push(
+                            widget: CheckOutPage(
+                              singleProduct: productModel,
+                            ),
+                            context: context);
                       },
-                      child: SmallText(
-                        text: "ADD TO CART",
-                      ),
+                      child: SmallText(text: "BUY"),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SizedBox(
-                      width: 150,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Routes.instance
-                              .push(widget: const FavoritePage(), context: context);
-                        },
-                        child: SmallText(text: "BUY"),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
+                  )
+                ],
+              )
+            ],
           ),
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/firebase_helper/firebase_firestore_helper/firebase_firestore.dart';
+import 'package:food_app/firebase/firebase_firestore.dart';
 import 'package:food_app/models/categories_model.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/provider/app_provider.dart';

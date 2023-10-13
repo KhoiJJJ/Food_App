@@ -69,4 +69,27 @@ class AuthenticationProvider {
       throw error;
     }
   }
+
+  Future<bool> changePassword(String password, BuildContext context) async {
+    try {
+      showLoaderDialog(context);
+      _firebaseAuth.currentUser!.updatePassword(password);
+      // UserCredential userCredential = await _firebaseAuth
+      //     .createUserWithEmailAndPassword(email: email, password: password);
+      // UserModel userModel = UserModel(
+      //     id: userCredential.user!.uid,
+      //     name: name,
+      //     email: email,
+      //     phone: phone,
+      //     image: null);
+      // _firestore.collection("users").doc(userModel.id).set(userModel.toJson());
+      Navigator.of(context, rootNavigator: true).pop();
+      showMessage("Password changed");
+      Navigator.of(context).pop();
+
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

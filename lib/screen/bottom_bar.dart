@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/screen/account_screen.dart';
 import 'package:food_app/screen/cart_screen.dart';
-import 'package:food_app/screen/favorite_screen.dart';
 import 'package:food_app/screen/home_screen.dart';
+import 'package:food_app/screen/orders_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class BottomBar extends StatefulWidget {
@@ -25,7 +25,7 @@ class _BottomBarState extends State<BottomBar> {
     return [
       const HomeScreen(),
       const CartPage(),
-      const FavoritePage(),
+      const OrdersPage(),
       const AccountPage(),
     ];
   }
@@ -45,13 +45,13 @@ class _BottomBarState extends State<BottomBar> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.heart),
-        title: ("Cart"),
+        icon: const Icon(CupertinoIcons.bag_fill),
+        title: ("Orders"),
         activeColorPrimary: CupertinoColors.destructiveRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.person),
+        icon: const Icon(CupertinoIcons.person),
         title: ("Account"),
         activeColorPrimary: CupertinoColors.destructiveRed,
         inactiveColorPrimary: CupertinoColors.systemGrey,

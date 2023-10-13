@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/sign_in.dart';
 import 'package:food_app/constants/constants.dart';
-import 'package:food_app/firebase_helper/firebase_auth_helper/firebase_auth_helper.dart';
+import 'package:food_app/firebase/firebase_auth_helper.dart';
 import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:food_app/widgets/top_titles.dart';

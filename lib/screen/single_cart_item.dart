@@ -67,6 +67,8 @@ class _SingleCartItemState extends State<SingleCartItem> {
                                     quantity--;
                                   }
                                 });
+                                appProvider.updateQty(
+                                    widget.singleProduct, quantity);
                               },
                               padding: EdgeInsets.zero,
                               child: const CircleAvatar(
@@ -80,6 +82,8 @@ class _SingleCartItemState extends State<SingleCartItem> {
                             ),
                             CupertinoButton(
                               onPressed: () {
+                                appProvider.updateQty(
+                                    widget.singleProduct, quantity);
                                 setState(() {
                                   quantity++;
                                 });

@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../provider/app_provider.dart';
 import '../widgets/custom_app_bar.dart';
+import '../widgets/primary_button.dart';
+import '../widgets/small_text.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -17,6 +19,34 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     return Scaffold(
+      bottomNavigationBar: SizedBox(
+        height: 180,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmallText(text: "Total"),
+                  SmallText(
+                    text: "\$${appProvider.totalPrice().toString()}",
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              PrimaryButton(
+                title: "Checkout",
+                onPressed: () {
+                  //Routes.instance.push(widget: const CheckOutPage(), context: context);
+                },
+              )
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black),
         centerTitle: true,

@@ -7,24 +7,22 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-              text: word1,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
-              children: [
-                TextSpan(
-                  text: " $word2",
-                  style: const TextStyle(
-                      color: Colors.orangeAccent,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
-                ),
-              ])),
-    );
+    return RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+            text: word1,
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w600),
+            children: [
+              TextSpan(
+                text: " $word2",
+                style: const TextStyle(
+                    color: Colors.orangeAccent,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+            ]));
   }
 }

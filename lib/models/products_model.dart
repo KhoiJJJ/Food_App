@@ -13,7 +13,7 @@ class ProductModel {
   String name;
   double price;
   String description;
-  String status;
+
   int? qty;
 
   ProductModel(
@@ -22,7 +22,6 @@ class ProductModel {
       required this.name,
       required this.price,
       required this.description,
-      required this.status,
       required this.isFavorite,
       this.qty});
 
@@ -33,7 +32,6 @@ class ProductModel {
         image: json["image"],
         isFavorite: false,
         price: double.parse(json["price"].toString()),
-        status: json["status"],
         qty: json["qty"],
       );
 
@@ -44,7 +42,6 @@ class ProductModel {
         "description": description,
         "isFavorite": isFavorite,
         "price": price,
-        "status": status,
         "qty": qty,
       };
 
@@ -58,7 +55,6 @@ class ProductModel {
         image: image,
         isFavorite: isFavorite,
         price: price,
-        status: status,
         qty: qty ?? this.qty,
       );
 }
