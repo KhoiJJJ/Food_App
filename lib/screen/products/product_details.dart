@@ -4,8 +4,8 @@ import 'package:food_app/constants/constants.dart';
 import 'package:food_app/constants/routes.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/provider/app_provider.dart';
-import 'package:food_app/screen/cart_screen.dart';
-import 'package:food_app/screen/check_out_screen.dart';
+import 'package:food_app/screen/cart/cart_screen.dart';
+import 'package:food_app/screen/cart/check_out_screen.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:provider/provider.dart';
 

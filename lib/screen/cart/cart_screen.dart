@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/constants/constants.dart';
-import 'package:food_app/screen/cart_item_checkout.dart';
-import 'package:food_app/screen/single_cart_item.dart';
+import 'package:food_app/screen/cart/cart_item_checkout.dart';
+import 'package:food_app/screen/products/single_cart_item.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/routes.dart';
-import '../provider/app_provider.dart';
-import '../widgets/custom_app_bar.dart';
-import '../widgets/primary_button.dart';
-import '../widgets/small_text.dart';
+import '../../constants/routes.dart';
+import '../../provider/app_provider.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/primary_button.dart';
+import '../../widgets/small_text.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

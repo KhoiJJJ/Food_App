@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:food_app/constants/constants.dart';
 import 'package:food_app/firebase/firebase_auth_helper.dart';
 
-import '../widgets/custom_app_bar.dart';
-import '../widgets/primary_button.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/primary_button.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});

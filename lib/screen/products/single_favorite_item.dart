@@ -4,9 +4,9 @@ import 'package:food_app/constants/constants.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/app_provider.dart';
+import '../../provider/app_provider.dart';
 
-import '../widgets/small_text.dart';
+import '../../widgets/small_text.dart';
 
 class SingleFavoriteItem extends StatefulWidget {
   final ProductModel singleProduct;

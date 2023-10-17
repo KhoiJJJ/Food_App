@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/screen/single_favorite_item.dart';
+import 'package:food_app/screen/products/single_favorite_item.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/app_provider.dart';
-import '../widgets/custom_app_bar.dart';
+import '../../provider/app_provider.dart';
+import '../../widgets/custom_app_bar.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});

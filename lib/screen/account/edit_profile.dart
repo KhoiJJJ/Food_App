@@ -8,7 +8,7 @@ import 'package:food_app/widgets/primary_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/custom_app_bar.dart';
+import '../../widgets/custom_app_bar.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});

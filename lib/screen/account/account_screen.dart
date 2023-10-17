@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/auth/sign_in.dart';
-import 'package:food_app/screen/change_password_screen.dart';
-import 'package:food_app/screen/edit_profile.dart';
+import 'package:food_app/screen/account/change_password_screen.dart';
+import 'package:food_app/screen/account/edit_profile.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/routes.dart';
-import '../firebase/firebase_auth_helper.dart';
-import '../provider/app_provider.dart';
-import '../widgets/custom_app_bar.dart';
+import '../../constants/routes.dart';
+import '../../firebase/firebase_auth_helper.dart';
+import '../../provider/app_provider.dart';
+import '../../widgets/custom_app_bar.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});

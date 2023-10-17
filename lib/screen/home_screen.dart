@@ -5,8 +5,8 @@ import 'package:food_app/firebase/firebase_firestore.dart';
 import 'package:food_app/models/categories_model.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/provider/app_provider.dart';
-import 'package:food_app/screen/category_view.dart';
-import 'package:food_app/screen/product_details.dart';
+import 'package:food_app/screen/products/category_view.dart';
+import 'package:food_app/screen/products/product_details.dart';
 import 'package:food_app/widgets/custom_app_bar.dart';
 import 'package:provider/provider.dart';
 

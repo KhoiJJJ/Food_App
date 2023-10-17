@@ -6,8 +6,8 @@ import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/primary_button.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:provider/provider.dart';
-import '../provider/app_provider.dart';
-import '../widgets/custom_app_bar.dart';
+import '../../provider/app_provider.dart';
+import '../../widgets/custom_app_bar.dart';
 
 class CartItemCheckoutPage extends StatefulWidget {
   const CartItemCheckoutPage({super.key});

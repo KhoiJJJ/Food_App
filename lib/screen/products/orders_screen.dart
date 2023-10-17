@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:food_app/firebase/firebase_firestore.dart';
 import 'package:food_app/models/orders_model.dart';
 
-import '../widgets/custom_app_bar.dart';
-import '../widgets/small_text.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/small_text.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
