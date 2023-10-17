@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:food_app/auth/sign_up.dart';
+import 'package:food_app/constants/constants.dart';
 import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:food_app/widgets/top_titles.dart';
@@ -10,7 +11,6 @@ import 'package:food_app/widgets/top_titles.dart';
 import '../constants/routes.dart';
 import '../firebase/firebase_auth_helper.dart';
 import '../widgets/primary_button.dart';
-import '../widgets/show_alert.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -77,11 +77,11 @@ class _SignInPageState extends State<SignInPage> {
                       .signInWithEmailAndPassword(
                           _emailController.text, _passwordController.text)
                       .then((userCredential) {
-                    showAlert(context, "You logged in");
+                    showMessage("You logged in");
                     Routes.instance.pushAndRemoveUntil(
                         widget: const BottomBar(), context: context);
                   }).catchError((e) {
-                    showAlert(context, e.toString());
+                    showMessage(e.toString());
                   });
                 },
               ),
@@ -124,11 +124,11 @@ class _SignInPageState extends State<SignInPage> {
                         AuthenticationProvider()
                             .signInWithGoogle()
                             .then((value) {
-                          showAlert(context, "You logged in");
+                          showMessage("You logged in");
                           Routes.instance.pushAndRemoveUntil(
                               widget: const BottomBar(), context: context);
                         }).catchError((e) {
-                          showAlert(context, e.toString());
+                          showMessage(e.toString());
                         });
                       },
                     ),

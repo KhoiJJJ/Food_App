@@ -89,12 +89,14 @@ class FirebaseFirestoreHelper {
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
+        "orderId": admin.id,
       });
       documentReference.set({
         "products": list.map((e) => e.toJson()),
         "status": "Pending",
         "totalPrice": totalPrice,
         "payment": payment,
+        "orderId": documentReference.id,
       });
       Navigator.of(context, rootNavigator: true).pop();
       showMessage("Ordered Successfully");

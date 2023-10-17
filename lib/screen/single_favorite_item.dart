@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/constants/constants.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/app_provider.dart';
-import '../widgets/show_alert.dart';
+
 import '../widgets/small_text.dart';
 
 class SingleFavoriteItem extends StatefulWidget {
@@ -55,7 +56,7 @@ class _SingleFavoriteItemState extends State<SingleFavoriteItem> {
                                       listen: false);
                               appProvider
                                   .removeFavoriteProduct(widget.singleProduct);
-                              showAlert(context, "Removed");
+                              showMessage("Removed");
                             },
                             child: SmallText(text: "Removed from Wishlist"))
                       ],

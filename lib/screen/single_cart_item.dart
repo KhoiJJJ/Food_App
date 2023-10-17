@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:provider/provider.dart';
+import '../constants/constants.dart';
 import '../provider/app_provider.dart';
-import '../widgets/show_alert.dart';
+
 import '../widgets/small_text.dart';
 
 class SingleCartItem extends StatefulWidget {
@@ -120,7 +121,7 @@ class _SingleCartItemState extends State<SingleCartItem> {
                                 onPressed: () {
                                   appProvider
                                       .removeCartProduct(widget.singleProduct);
-                                  showAlert(context, "Removed");
+                                  showMessage("Removed");
                                 },
                                 child: const CircleAvatar(
                                     maxRadius: 13,

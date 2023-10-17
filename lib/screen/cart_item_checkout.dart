@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/firebase/firebase_firestore.dart';
-import 'package:food_app/models/products_model.dart';
+
 import 'package:food_app/screen/bottom_bar.dart';
 import 'package:food_app/widgets/primary_button.dart';
 import 'package:food_app/widgets/small_text.dart';
@@ -9,15 +9,14 @@ import 'package:provider/provider.dart';
 import '../provider/app_provider.dart';
 import '../widgets/custom_app_bar.dart';
 
-class CheckOutPage extends StatefulWidget {
-  final ProductModel singleProduct;
-  const CheckOutPage({super.key, required this.singleProduct});
+class CartItemCheckoutPage extends StatefulWidget {
+  const CartItemCheckoutPage({super.key});
 
   @override
-  State<CheckOutPage> createState() => _CheckOutPageState();
+  State<CartItemCheckoutPage> createState() => _CartItemCheckoutPageState();
 }
 
-class _CheckOutPageState extends State<CheckOutPage> {
+class _CartItemCheckoutPageState extends State<CartItemCheckoutPage> {
   int groupValue = 1;
   @override
   Widget build(BuildContext context) {
@@ -103,14 +102,12 @@ class _CheckOutPageState extends State<CheckOutPage> {
             PrimaryButton(
               title: "Continues",
               onPressed: () async {
-                appProvider.clearBuyProduct();
-                appProvider.addBuyProduct(widget.singleProduct);
-
                 bool value = await FirebaseFirestoreHelper.instance
                     .upLoadOrderedProductFirebase(
                         appProvider.getBuyProductList,
                         context,
                         groupValue == 1 ? "Cash on Delivery" : "Pay online");
+                appProvider.clearBuyProduct();
                 if (value) {
                   Future.delayed(const Duration(seconds: 2), () {
                     Navigator.of(context, rootNavigator: true)

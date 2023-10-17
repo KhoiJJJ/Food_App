@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/constants/constants.dart';
 import 'package:food_app/constants/routes.dart';
 import 'package:food_app/models/products_model.dart';
 import 'package:food_app/provider/app_provider.dart';
@@ -7,8 +8,6 @@ import 'package:food_app/screen/cart_screen.dart';
 import 'package:food_app/screen/check_out_screen.dart';
 import 'package:food_app/widgets/small_text.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/show_alert.dart';
 
 class ProductDetails extends StatefulWidget {
   final ProductModel singleProduct;
@@ -65,8 +64,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               !widget.singleProduct.isFavorite;
                         });
                         if (widget.singleProduct.isFavorite) {
-                          appProvider
-                              .addFavoriteProduct(widget.singleProduct);
+                          appProvider.addFavoriteProduct(widget.singleProduct);
                         } else {
                           appProvider
                               .removeFavoriteProduct(widget.singleProduct);
@@ -128,7 +126,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ProductModel productModel =
                           widget.singleProduct.copyWith(qty: quantity);
                       appProvider.addCartProduct(productModel);
-                      showAlert(context, "Add to cart");
+                      showMessage("Add to cart");
                     },
                     child: SmallText(
                       text: "ADD TO CART",

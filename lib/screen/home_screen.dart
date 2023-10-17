@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 import 'package:food_app/firebase/firebase_firestore.dart';
 import 'package:food_app/models/categories_model.dart';
@@ -44,6 +46,17 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  TextEditingController search = TextEditingController();
+  List<ProductModel> searchList = [];
+  void searchProducts(String value) {
+    searchList = productModelList
+        .where((element) =>
+            element.name.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextFormField(
+                            controller: search,
+                            onChanged: (String value) {
+                              searchProducts(value);
+                            },
                             decoration: const InputDecoration(
                                 hintText: 'Search',
                                 suffixIcon: Icon(Icons.search)),
@@ -128,81 +145,166 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 15,
                   ),
-                  productModelList.isEmpty
-                      ? Center(
-                          child: SmallText(
-                            text: "Best Products is empty",
-                          ),
-                        )
-                      : Padding(
+                  !isSearched()
+                      ? Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: SmallText(
                             text: 'Best Products',
                             size: 18,
                           ),
-                        ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: GridView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: productModelList.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                mainAxisSpacing: 20,
-                                crossAxisSpacing: 20,
-                                childAspectRatio: 0.9,
-                                crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          ProductModel singleProduct = productModelList[index];
-                          //Container for product
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.red.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 12,
+                        )
+                      : SizedBox.fromSize(),
+                  search.text.isNotEmpty && searchList.isEmpty
+                      ? Center(
+                          child: SmallText(text: "No Product Founded"),
+                        )
+                      : searchList.isNotEmpty
+                          ? Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: GridView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  itemCount: searchList.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          mainAxisSpacing: 20,
+                                          crossAxisSpacing: 20,
+                                          childAspectRatio: 0.9,
+                                          crossAxisCount: 2),
+                                  itemBuilder: (context, index) {
+                                    ProductModel singleProduct =
+                                        searchList[index];
+                                    //Container for product
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.red.withOpacity(0.2),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(
+                                            height: 12,
+                                          ),
+                                          Image.network(
+                                            singleProduct.image,
+                                            height: 60,
+                                            width: 60,
+                                          ),
+                                          SmallText(
+                                            text: singleProduct.name,
+                                            size: 18,
+                                          ),
+                                          SmallText(
+                                              text:
+                                                  "Price \$${singleProduct.price}"),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          SizedBox(
+                                              height: 45,
+                                              width: 140,
+                                              child: OutlinedButton(
+                                                  onPressed: () {
+                                                    Routes.instance.push(
+                                                        widget: ProductDetails(
+                                                            singleProduct:
+                                                                singleProduct),
+                                                        context: context);
+                                                  },
+                                                  child: SmallText(
+                                                    text: "Buy",
+                                                    color: Colors.red,
+                                                  )))
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                            )
+                          : productModelList.isEmpty
+                              ? Center(
+                                  child: SmallText(
+                                    text: "Best Products is empty",
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: GridView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      primary: false,
+                                      itemCount: productModelList.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              mainAxisSpacing: 20,
+                                              crossAxisSpacing: 20,
+                                              childAspectRatio: 0.9,
+                                              crossAxisCount: 2),
+                                      itemBuilder: (context, index) {
+                                        ProductModel singleProduct =
+                                            productModelList[index];
+                                        //Container for product
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.red.withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 12,
+                                              ),
+                                              Image.network(
+                                                singleProduct.image,
+                                                height: 60,
+                                                width: 60,
+                                              ),
+                                              SmallText(
+                                                text: singleProduct.name,
+                                                size: 18,
+                                              ),
+                                              SmallText(
+                                                  text:
+                                                      "Price \$${singleProduct.price}"),
+                                              const SizedBox(
+                                                height: 30,
+                                              ),
+                                              SizedBox(
+                                                  height: 45,
+                                                  width: 140,
+                                                  child: OutlinedButton(
+                                                      onPressed: () {
+                                                        Routes.instance.push(
+                                                            widget: ProductDetails(
+                                                                singleProduct:
+                                                                    singleProduct),
+                                                            context: context);
+                                                      },
+                                                      child: SmallText(
+                                                        text: "Buy",
+                                                        color: Colors.red,
+                                                      )))
+                                            ],
+                                          ),
+                                        );
+                                      }),
                                 ),
-                                Image.network(
-                                  singleProduct.image,
-                                  height: 60,
-                                  width: 60,
-                                ),
-                                SmallText(
-                                  text: singleProduct.name,
-                                  size: 18,
-                                ),
-                                SmallText(
-                                    text: "Price \$${singleProduct.price}"),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                SizedBox(
-                                    height: 45,
-                                    width: 140,
-                                    child: OutlinedButton(
-                                        onPressed: () {
-                                          Routes.instance.push(
-                                              widget: ProductDetails(
-                                                  singleProduct: singleProduct),
-                                              context: context);
-                                        },
-                                        child: SmallText(
-                                          text: "Buy",
-                                          color: Colors.red,
-                                        )))
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
                 ],
               ),
             ),
     );
+  }
+
+  bool isSearched() {
+    if (search.text.isNotEmpty && searchList.isEmpty) {
+      return true;
+    } else if (search.text.isEmpty && searchList.isNotEmpty) {
+      return false;
+    } else if (searchList.isNotEmpty) {
+      return false;
+    } else {
+      return false;
+    }
   }
 }
