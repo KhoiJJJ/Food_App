@@ -38,14 +38,11 @@ class UserModel {
         "phone": phone,
       };
 
-  UserModel copyWith({
-    String? name,image
-  }) =>
-      UserModel(
+  UserModel copyWith({String? name, image}) => UserModel(
         id: id,
         email: email,
         name: name ?? this.name,
-        image: image?? this.image,
+        image: image ?? this.image,
         phone: phone,
       );
 }

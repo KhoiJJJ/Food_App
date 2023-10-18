@@ -104,11 +104,6 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void clearCart() {
-    _buyProductList.clear();
-    notifyListeners();
-  }
-
   void clearBuyProduct() {
     _buyProductList.clear();
     notifyListeners();
